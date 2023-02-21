@@ -31,7 +31,7 @@ class WordCounter extends JFrame implements ActionListener {
 
         buttonSubmit.addActionListener(inputText);  // addActionListener to button
 
-        inputTextArea = new JTextArea();// create a text area, specifying the rows and columns
+        inputTextArea = new JTextArea();// create a text area
 
         // add components to frame
         panel.add(displayNumOfWords);
