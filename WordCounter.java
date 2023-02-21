@@ -8,7 +8,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-class Text extends JFrame implements ActionListener {
+class WordCounter extends JFrame implements ActionListener {
 
     static JFrame window;
     static JPanel panel;
@@ -21,13 +21,13 @@ class Text extends JFrame implements ActionListener {
     static JLabel numofChars;
     static String text;
 
-    Text() {}// default constructor
+    WordCounter() {}// default constructor
 
     public static void main(String[] args)
     {
         mainFrame();//Setup of Jframe and components
 
-        Text inputText = new Text();// create an object of the text class
+        WordCounter inputText = new WordCounter();// create an object of the WordCounter class
 
         buttonSubmit.addActionListener(inputText);  // addActionListener to button
 
