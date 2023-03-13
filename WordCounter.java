@@ -1,18 +1,15 @@
-/**This program uses the Java Swing API and counts the number of words and characters entered by the user and returns them to the user.
+/**This program uses the Java Swing GUI and counts the number of words and characters entered by the user and returns them to the user.
  * The code to calculate words and chars are found in Class Counter.
  * Upcoming improvements:
- * 1. Number of Characters currently only shows letters and digits. Include special characters.
+ * 1. Number of Characters currently only shows letters and digits. Include special characters ( and white space?).
  * 2. Update the GUI and make it better looking.
- *3. Remove button and make the answers continuous.
  */
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-class WordCounter extends JFrame implements ActionListener {
+class WordCounter extends JFrame  {
 
     static JFrame window;
     static JPanel panel;
-    static JButton buttonSubmit;
     static JLabel introLabel;
     static JTextArea inputTextArea;
     static JLabel displayNumOfWords;
@@ -27,50 +24,44 @@ class WordCounter extends JFrame implements ActionListener {
     {
         mainFrame();//Setup of Jframe and components
 
-        WordCounter inputText = new WordCounter();// create an object of the WordCounter class
-
-        buttonSubmit.addActionListener(inputText);  // addActionListener to button
-
-        inputTextArea = new JTextArea();// create a text area
+        inputTextArea = new JTextArea();// create a text area, specifying the rows and columns
 
         // add components to frame
         panel.add(displayNumOfWords);
         panel.add(numOfWords);
-        panel.add(buttonSubmit);
         panel.add(displayNumOfChars);
         panel.add(numofChars);
         window.add(panel,BorderLayout.SOUTH);
         window.add(inputTextArea,BorderLayout.CENTER);
         window.add(introLabel,BorderLayout.NORTH);
         window.show();
+
+       while (true) { //Loop answers
+            text = inputTextArea.getText();
+
+        //Calculates number of words and chars
+        int numWords = Counter.countWordsInString(text);
+        int numChars = Counter.countCharsInString(text);
+
+        //Changes Jlabels to number of words and chars
+        numofChars.setText(String.valueOf(numChars));
+        numOfWords.setText(String.valueOf(numWords));
+        }
     }
 
-    // if the button is pressed
-    public void actionPerformed(ActionEvent e) {
-        text = inputTextArea.getText();
-
-            //Calculates number of words and chars
-            int numWords = Counter.countWordsInString(text);
-            int numChars = Counter.countCharsInString(text);
-
-            //Changes Jlabels to number of words and chars
-            numofChars.setText(String.valueOf(numChars));
-            numOfWords.setText(String.valueOf(numWords));
-
-    }//actionperformed
     public static void mainFrame(){
 
-//        // create a new frame to store text field and button
+//        // create a new frame to store text fields
         window = new JFrame("Word and Character Counter");
         window.setLocation(250,0);
         window.setSize(800,800);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        //Create panel to hold buttons and answers
+        //Create panel to hold answers
         panel = new JPanel(new GridLayout(1,5));
 
-        //Create labels to hold info and answers
+        //Create labels to populate panel
         introLabel = new JLabel("Welcome to the word counter! Insert your text below");
         introLabel.setHorizontalAlignment(JLabel.CENTER);
         introLabel.setFont(new Font("Serif", Font.PLAIN, 24));
@@ -100,8 +91,5 @@ class WordCounter extends JFrame implements ActionListener {
         numofChars.setFont(new Font("Serif", Font.PLAIN, 24));
         numofChars.setOpaque(true);
         numofChars.setBackground(Color.CYAN);
-
-        // create a new button
-        buttonSubmit = new JButton("Submit");
-    }
+    }//main
 }//class
